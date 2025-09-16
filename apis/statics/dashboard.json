@@ -1,5 +1,5 @@
 {
-  "title": "Welcome $username$!",
+  "title": "Welcome $title$ $first$ $last$!",
   "description": "I chose to make a little touch and to use my own modal package as a quick confirm for logout. Hope you'll like it.",
   "button": "Logout"
 }

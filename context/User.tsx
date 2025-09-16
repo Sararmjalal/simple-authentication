@@ -1,6 +1,8 @@
 "use client"
 
-import { getLocalStorage } from "@/lib/utils"
+import { getLocalStorage, removeLocalStorage, setLocalStorage } from "@/lib/utils"
+import { ROUTES } from "@/types/enums/routes"
+import { useRouter } from "next/navigation"
 import React, { createContext, useContext, useState, ReactNode, useMemo } from "react"
 
 type User = Pick<Queries.IGETRandomUsersResponse, "name" | "email" | "picture">
@@ -14,11 +16,19 @@ type UserContextType = {
 
 const UserContext = createContext<UserContextType | undefined>(undefined)
 
-export const UserProvider = ({ children }: { children: ReactNode }) => {
-  const [thisUser, setThisUser] = useState(getLocalStorage<User>("user"))
+const localStorageKey = "session"
 
-  const removeUser = () => setThisUser(undefined)
-  const setUser = (newUser: User) => setThisUser(newUser)
+export const UserProvider = ({ children }: { children: ReactNode }) => {
+  const [thisUser, setThisUser] = useState(getLocalStorage<User>(localStorageKey))
+
+  const removeUser = () => {
+    setThisUser(undefined)
+    removeLocalStorage(localStorageKey)
+  }
+  const setUser = (newUser: User) => {
+    setThisUser(newUser)
+    setLocalStorage<User>(localStorageKey, newUser)
+  }
 
   const status: UserStatus = useMemo(() => {
     if (!!thisUser) return "authorized"
@@ -44,4 +54,18 @@ export const useUser = () => {
     throw new Error("useUser must be used within a UserProvider")
   }
   return context
+}
+
+export const useLogout = () => {
+  const { push } = useRouter()
+  const { thisUser, removeUser } = useUser()
+
+  const logout = () => {
+    if (thisUser) {
+      removeUser()
+      push(ROUTES.AUTH)
+    }
+  }
+
+  return { logout }
 }

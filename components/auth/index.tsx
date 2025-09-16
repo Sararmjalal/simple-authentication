@@ -1,8 +1,8 @@
 "use client"
+import AuthLoading from "./Loading";
+import { useUser } from "@/context/User";
 import AuthForm from "@/components/auth/Form";
 import { Box, TypographyH1, TypographyP } from "@/components/ui";
-import { useUser } from "@/context/User";
-import AuthLoading from "./Loading";
 
 type Props = {
   authData: {
@@ -25,8 +25,8 @@ type Props = {
 }
 
 const AuthRoot = ({ authData }: Props) => {
-  const { thisUser } = useUser()
-  if (thisUser) return <AuthLoading />
+  const { status } = useUser()
+  if (status !== "unauthorized") return <AuthLoading />
   return (
     <Box className="md:max-w-md w-full p-6 bg-white rounded-lg shadow-md">
       <TypographyH1>

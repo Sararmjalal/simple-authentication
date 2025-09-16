@@ -13,6 +13,9 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { GETRandomUsers } from "@/apis/queries"
+import { useUser } from "@/context/User"
+import { useState } from "react"
 
 type Props = {
   formData: {
@@ -31,7 +34,9 @@ type Props = {
 
 const AuthForm = ({ formData }: Props) => {
 
+  const { setUser } = useUser()
   const { button, phoneNumber } = formData
+  const [loading, setLoading] = useState(false)
 
   const formSchema = z.object({
     phoneNumber: z.string().regex(new RegExp(phoneNumber.pattern), {
@@ -47,8 +52,18 @@ const AuthForm = ({ formData }: Props) => {
     },
   })
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+  async function onSubmit() {
+    setLoading(true)
+    const res = await GETRandomUsers({ results: 1, nat: "us" })
+    if (res) {
+      const { email, name, picture } = res.results[0]
+      return setUser({ name, email, picture })
+    }
+    form.setError("phoneNumber", {
+      type: "manual",
+      message: "Something went wrong! Please try again.",
+    })
+    setLoading(false)
   }
 
   return (
@@ -71,7 +86,7 @@ const AuthForm = ({ formData }: Props) => {
         />
         <Button
           className="w-full"
-          disabled={!form.formState.isValid}
+          disabled={!form.formState.isValid || loading}
           type="submit">
           {button}
         </Button>

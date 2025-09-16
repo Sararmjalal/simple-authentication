@@ -1,3 +1,3 @@
 export const API_ROUTES = {
-  GET_USER: "/api"
+  GET_RANDOM_USERS: "/api"
 }

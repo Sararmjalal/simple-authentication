@@ -1,24 +1,17 @@
 {
   "title": "Login / Sign up",
   "description": "Please enter your phone number to login",
-  "inputs": [
-    {
-      "label": "",
-      "helper": "",
-      "key": "phoneNumber",
+  "form": {
+    "phoneNumber": {
+      "label": "Enter your phone number",
+      "placeholder": "e.g. +1234567890",
+      "pattern": "^(?:09\\d{9}|\\+989\\d{9}|00989\\d{9})$",
       "type": "text",
       "inputMode": "numeric",
-      "value": "",
-      "pattern": "^(?:09\\d{9}|\\+989\\d{9}|00989\\d{9})$",
-      "placeholder": "Enter phone number here",
-      "prefix": "",
-      "suffix": "",
-      "required": true,
-      "disabled": false,
-      "display": true,
-      "focus": false,
-      "inputWidth": "100%"
-    }
-  ],
+      "defaultValue": "+98",
+      "patternMessage": "Please enter a valid phone number"
+    },
+    "button": "Continue"
+  },
   "button": "Continue"
 }

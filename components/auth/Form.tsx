@@ -53,7 +53,7 @@ const AuthForm = ({ formData }: Props) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 p-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 ">
         <FormField
           control={form.control}
           name="phoneNumber"
@@ -63,7 +63,7 @@ const AuthForm = ({ formData }: Props) => {
                 {phoneNumber.label}
               </FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder={phoneNumber.placeholder} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

@@ -3,8 +3,8 @@
   "description": "Please enter your phone number to login",
   "form": {
     "phoneNumber": {
-      "label": "Enter your phone number",
-      "placeholder": "e.g. +1234567890",
+      "label": "",
+      "placeholder": "+98",
       "pattern": "^(?:09\\d{9}|\\+989\\d{9}|00989\\d{9})$",
       "type": "text",
       "inputMode": "numeric",

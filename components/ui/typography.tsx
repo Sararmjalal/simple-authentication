@@ -1,5 +1,3 @@
-"use client"
-
 /**
 * Reimplementation of the shadcn/ui Typography examples (from
 * https://ui.shadcn.com/docs/components/typography). This file exports small

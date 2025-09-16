@@ -1,8 +1,0 @@
-{
-  "title": "Logging out of account",
-  "description": "With confirming this modal, you will be logged out from your account.",
-  "buttons": {
-    "confirm": "Confirm",
-    "cancel": "Cancel"
-  }
-}

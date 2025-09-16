@@ -3,7 +3,7 @@
 import { getLocalStorage } from "@/lib/utils"
 import React, { createContext, useContext, useState, ReactNode, useMemo } from "react"
 
-type User = Queries.IGETRandomUsersResponse
+type User = Pick<Queries.IGETRandomUsersResponse, "name" | "email" | "picture">
 type UserStatus = "pending" | "authorized" | "unauthorized" // we don't use pending cause there's no api for checking user.
 type UserContextType = {
   thisUser?: User

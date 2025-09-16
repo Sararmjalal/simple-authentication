@@ -13,14 +13,12 @@ export const RestrictionProvider = ({ children }: { children: ReactNode }) => {
   const { push } = useRouter()
   const pathname = usePathname()
 
-  const isInRestrictedPath = useMemo(() => {
-    return PRIVATE_ROUTES.includes(pathname)
-  }, [pathname])
-
   useEffect(() => {
-    if (status === "unauthorized" && isInRestrictedPath)
+    if (status === "authorized" && pathname.includes(ROUTES.AUTH))
+      push(ROUTES.DASHBOARD)
+    if (status === "unauthorized" && PRIVATE_ROUTES.includes(pathname))
       push(ROUTES.AUTH)
-  }, [isInRestrictedPath, status])
+  }, [pathname, status])
 
   return (
     <RestrictionContext.Provider value={null}>

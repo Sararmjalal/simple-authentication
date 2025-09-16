@@ -1,19 +1,10 @@
-import AuthForm from "@/components/auth/Form";
-import { Box, TypographyH1, TypographyP } from "@/components/ui";
-import authData from "@/apis/statics/authentication.json"
+import AuthRoot from "@/components/auth";
+import authData from "@/apis/statics/authentication.json";
 
-const AuthRoot = () => {
+const Auth = () => {
   return (
-    <Box className="md:max-w-md w-full p-6 bg-white rounded-lg shadow-md">
-      <TypographyH1>
-        {authData.title}
-      </TypographyH1>
-      <TypographyP>
-        {authData.description}
-      </TypographyP>
-      <AuthForm formData={authData.form} />
-    </Box>
+    <AuthRoot authData={authData} />
   )
 }
 
-export default AuthRoot
+export default Auth
